@@ -1,66 +1,46 @@
 # Настройка сайта записи (Pure Beauty)
 
-Сайт готов в коде. Осталось два блока настройки, которые нужно сделать тебе лично (это доступ к твоему Google-аккаунту и к хостингу — я туда логиниться не могу и не должен).
+Архитектура: **GitHub Pages** (статичен сайт, деплой автоматично при всеки push) + **Google Apps Script** (бекенд, който пише директно в твоя Google Calendar).
 
-Заложено 20-30 минут, один раз.
+Няма Vercel, няма отделен акаунт за хостинг, няма service account/private key — всичко върви през GitHub, освен самия Apps Script (той е Google, неизбежно, защото пише в Google Calendar).
 
-## Часть 1 — Google Calendar (бесплатно)
+Еднократна настройка отнема ~10 минути.
 
-Цель: создать отдельный "служебный" доступ, через который сайт сам, автоматически, будет создавать события в твоём календаре — без твоего пароля.
+## Част 1 — Google Apps Script (бекенд)
 
-1. Зайди на https://console.cloud.google.com (под своим Google-аккаунтом, тем же, где твой рабочий календарь).
-2. Создай новый проект (кнопка "New Project" вверху) — назови, например, `pure-beauty-booking`.
-3. В поиске сверху введи "Google Calendar API" → открой → нажми **Enable**.
-4. Слева меню → **APIs & Services → Credentials** → **Create Credentials → Service account**.
-   - Имя: `booking-site`
-   - Роль — можно пропустить (Continue → Done).
-5. Открой созданный service account → вкладка **Keys** → **Add Key → Create new key → JSON**.
-   - Скачается `.json` файл — **это ключ доступа, никому не отправляй и не выкладывай публично**.
-6. Открой этот JSON-файл текстовым редактором. Тебе нужны из него два значения:
-   - `client_email` — например `booking-site@pure-beauty-booking.iam.gserviceaccount.com`
-   - `private_key` — длинная строка, начинается с `-----BEGIN PRIVATE KEY-----`
+1. Отвори https://script.google.com (със същия Google акаунт, в който е твоят календар) → **New project**.
+2. Изтрий съдържимото на `Code.gs` по подразбиране и постави съдържимото от [`apps-script/Code.gs`](apps-script/Code.gs) от този репозиторий.
+3. В менюто вляво (иконка зъбно колело "Project Settings") → покажи `appsscript.json` в редактора (Show "appsscript.json" manifest file in editor checkbox) → отвори го и постави съдържимото на [`apps-script/appsscript.json`](apps-script/appsscript.json).
+4. Ако използваш календар, различен от основния — смени `CALENDAR_ID` в горната част на `Code.gs` (иначе остави `'primary'`).
+5. Горе вдясно → **Deploy → New deployment**:
+   - Тип: **Web app**
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+   - **Deploy**
+6. Ще получиш URL от вида `https://script.google.com/macros/s/XXXXX/exec` — това е адресът на бекенда. Копирай го.
+7. При първо стартиране Google ще поиска разрешение (авторизация на скрипта до твоя календар) — потвърди с твоя акаунт.
 
-7. Теперь дай этому service account доступ к твоему реальному календарю:
-   - Открой https://calendar.google.com → настройки (шестерёнка) → **Settings**
-   - Слева выбери свой календарь (или "основной" — под твоим именем)
-   - **Share with specific people** → добавь email из `client_email` (шаг 6) → права **"Make changes to events"**
-   - Там же, в разделе **Integrate calendar**, скопируй **Calendar ID** (обычно это твой email вида `rostislav...@gmail.com`, либо длинный ID вида `xxxxx@group.calendar.google.com`, если это отдельный календарь, а не основной).
+## Част 2 — GitHub Pages (сайт)
 
-Сохрани три значения — они понадобятся на шаге деплоя:
-- `GOOGLE_SERVICE_ACCOUNT_EMAIL` = client_email
-- `GOOGLE_PRIVATE_KEY` = private_key (целиком, вместе с `-----BEGIN...-----` и `-----END...-----`)
-- `GOOGLE_CALENDAR_ID` = Calendar ID
-
-## Часть 2 — Деплой через GitHub Actions на Vercel (бесплатно, поддомен *.vercel.app)
-
-Хостинг всё равно Vercel (бесплатный тариф) — но вместо встроенной git-интеграции Vercel деплоем управляет GitHub Actions (`.github/workflows/deploy.yml`, уже в репозитории). Так деплой полностью виден и управляется через GitHub, а не "по клику" в панели Vercel.
-
-Код уже запушен в https://github.com/rostislavruslanov11-cell/bta
-
-1. Создай аккаунт на https://vercel.com, если ещё нет (можно через GitHub-логин).
-2. Создай там пустой проект **без подключения git-интеграции**:
-   - Установи Vercel CLI (у себя в терминале): `npm install -g vercel`
-   - В папке `booking-site` выполни `vercel login` (откроется браузер для входа) и затем `vercel link` — CLI спросит "Set up and deploy?", подтверди, привяжет папку к новому проекту в Vercel.
-   - После этого появится файл `.vercel/project.json` с двумя значениями: `orgId` и `projectId`.
-3. Получи **Vercel Token**: vercel.com → Account Settings → **Tokens** → Create Token → скопируй значение (покажется один раз).
-4. В GitHub-репозитории `bta` → **Settings → Secrets and variables → Actions → New repository secret** — добавь три секрета:
-   - `VERCEL_TOKEN` = токен из шага 3
-   - `VERCEL_ORG_ID` = `orgId` из `.vercel/project.json`
-   - `VERCEL_PROJECT_ID` = `projectId` из `.vercel/project.json`
-5. В самом проекте на vercel.com → **Settings → Environment Variables** добавь три переменные из части 1 (Production):
-   - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
-   - `GOOGLE_PRIVATE_KEY` (вставляй как есть, с переносами строк)
-   - `GOOGLE_CALENDAR_ID`
-6. Сделай любой пуш в `main` (или запусти workflow вручную: репозиторий → Actions → Deploy to Vercel → Run workflow) — GitHub Actions задеплоит сайт. Ссылка на сайт появится в выводе последнего шага (`vercel deploy`).
+1. В репозитория [bta](https://github.com/rostislavruslanov11-cell/bta) → **Settings → Pages** → под "Build and deployment" → Source: **GitHub Actions** (само този чекбокс, еднократно).
+2. Пак в Settings → **Secrets and variables → Actions → Variables** таб → **New repository variable**:
+   - Name: `APPS_SCRIPT_URL`
+   - Value: URL-ът от Част 1, стъпка 6
+3. Всеки push в `main` (папка `public/`) автоматично пуска workflow-а `.github/workflows/deploy.yml`, който качва сайта на GitHub Pages и слага правилния URL в `config.js`.
+4. Адресът на сайта ще е нещо от рода `https://rostislavruslanov11-cell.github.io/bta/` — виждаш го в Settings → Pages, след първия успешен деплой.
 
 ## Проверка
 
-1. Открой полученную ссылку, заполни форму тестовой записью на завтра.
-2. Проверь свой Google Calendar — должно появиться событие с именем клиента и услугой.
-3. Попробуй записаться второй раз на тот же час — сайт должен показать "этот час уже занят".
+1. Отвори сайта, направи тестова резервация за утре.
+2. Провери Google Calendar — трябва да се появи събитие с името на клиента и услугата.
+3. Опитай да резервираш пак същия час — сайтът трябва да покаже "този час вече е зает".
 
-## Что можно поправить дальше
+## Ако нещо в Code.gs се промени по-късно
 
-- Рабочие часы (сейчас 09:00–19:00) и длительность услуг — в `api/book.js`, в начале файла.
-- Список услуг и цены — в `public/index.html` (`<select>`) и `api/book.js` (`SERVICES`).
-- Свой домен вместо `*.vercel.app` — добавляется в Vercel → Settings → Domains (домен сам по себе может стоить денег в регистраторе, если захочешь не бесплатный поддомен).
+Промените в `apps-script/Code.gs` в GitHub НЕ се качват автоматично в script.google.com (това е ръчна стъпка, различна система от GitHub Pages). При промяна: копирай новото съдържимо в script.google.com редактора → **Deploy → Manage deployments** → редактирай активния деплой → **Deploy** (така URL адресът остава същият).
+
+## Какво може да се коригира
+
+- Работно време (сега 09:00–19:00) и продължителност на услугите — в началото на `apps-script/Code.gs`.
+- Списък услуги и цени — в `public/index.html` (`<select>`) и `apps-script/Code.gs` (`SERVICES`).
+- Собствен домейн вместо `github.io` — Settings → Pages → Custom domain (домейнът сам по себе си може да струва пари при регистратор, ако не искаш безплатния поддомейн).

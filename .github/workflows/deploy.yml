@@ -1,26 +1,38 @@
-name: Deploy to Vercel
+name: Deploy site to GitHub Pages
 
 on:
   push:
     branches: [main]
+    paths: ['public/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+      - name: Inject Apps Script Web App URL
+        run: |
+          echo "window.APPS_SCRIPT_URL = '${{ vars.APPS_SCRIPT_URL }}';" > public/config.js
 
-      - name: Pull Vercel project settings
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
 
-      - name: Build project
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

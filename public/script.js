@@ -21,9 +21,10 @@ form.addEventListener('submit', async (e) => {
   };
 
   try {
-    const res = await fetch('/api/book', {
+    // Без изричен Content-Type: заявката остава "simple request" (без CORS
+    // preflight), който Apps Script Web App не обработва коректно.
+    const res = await fetch(window.APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
     const data = await res.json();
