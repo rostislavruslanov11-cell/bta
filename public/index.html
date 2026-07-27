@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pure Beauty — Резервация</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Pure Beauty</h1>
+    <p class="subtitle">Massage • Body Recovery • Therapy</p>
+
+    <form id="booking-form">
+      <label for="name">Име</label>
+      <input type="text" id="name" name="name" required autocomplete="name">
+
+      <label for="phone">Телефон</label>
+      <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+359...">
+
+      <label for="service">Услуга</label>
+      <select id="service" name="service" required>
+        <option value="" disabled selected>Избери услуга</option>
+        <option value="therapeutic">Терапевтичен масаж (60 мин)</option>
+        <option value="myofascial">Миофасциален масаж (60 мин)</option>
+        <option value="relax">Възстановяващ/релакс масаж (60 мин)</option>
+        <option value="smartrf">Smart RF (45 мин)</option>
+        <option value="hivamat">HIVAMAT — дълбока осцилация (45 мин)</option>
+        <option value="consult">Консултация (20 мин)</option>
+      </select>
+
+      <label for="date">Дата</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Час</label>
+      <input type="time" id="time" name="time" required min="09:00" max="18:30" step="1800">
+
+      <button type="submit" id="submit-btn">Резервирай</button>
+    </form>
+
+    <p id="status" role="status"></p>
+  </main>
+
+<script src="script.js"></script>
+</body>
+</html>
