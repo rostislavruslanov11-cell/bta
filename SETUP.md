@@ -31,17 +31,27 @@
 - `GOOGLE_PRIVATE_KEY` = private_key (целиком, вместе с `-----BEGIN...-----` и `-----END...-----`)
 - `GOOGLE_CALENDAR_ID` = Calendar ID
 
-## Часть 2 — Деплой на Vercel (бесплатно, поддомен *.vercel.app)
+## Часть 2 — Деплой через GitHub Actions на Vercel (бесплатно, поддомен *.vercel.app)
 
-1. Если ещё нет — создай аккаунт на https://vercel.com (можно через GitHub).
-2. Код нужно сначала положить в GitHub-репозиторий:
-   - Скажи мне "закинь booking-site на github" — я создам репозиторий и запушу код (спрошу подтверждение перед пушем).
-3. На vercel.com → **Add New → Project** → выбери этот GitHub-репозиторий → **Import**.
-4. На экране настроек перед деплоем — раздел **Environment Variables**, добавь три пары из части 1:
+Хостинг всё равно Vercel (бесплатный тариф) — но вместо встроенной git-интеграции Vercel деплоем управляет GitHub Actions (`.github/workflows/deploy.yml`, уже в репозитории). Так деплой полностью виден и управляется через GitHub, а не "по клику" в панели Vercel.
+
+Код уже запушен в https://github.com/rostislavruslanov11-cell/bta
+
+1. Создай аккаунт на https://vercel.com, если ещё нет (можно через GitHub-логин).
+2. Создай там пустой проект **без подключения git-интеграции**:
+   - Установи Vercel CLI (у себя в терминале): `npm install -g vercel`
+   - В папке `booking-site` выполни `vercel login` (откроется браузер для входа) и затем `vercel link` — CLI спросит "Set up and deploy?", подтверди, привяжет папку к новому проекту в Vercel.
+   - После этого появится файл `.vercel/project.json` с двумя значениями: `orgId` и `projectId`.
+3. Получи **Vercel Token**: vercel.com → Account Settings → **Tokens** → Create Token → скопируй значение (покажется один раз).
+4. В GitHub-репозитории `bta` → **Settings → Secrets and variables → Actions → New repository secret** — добавь три секрета:
+   - `VERCEL_TOKEN` = токен из шага 3
+   - `VERCEL_ORG_ID` = `orgId` из `.vercel/project.json`
+   - `VERCEL_PROJECT_ID` = `projectId` из `.vercel/project.json`
+5. В самом проекте на vercel.com → **Settings → Environment Variables** добавь три переменные из части 1 (Production):
    - `GOOGLE_SERVICE_ACCOUNT_EMAIL`
-   - `GOOGLE_PRIVATE_KEY` (вставляй как есть, с переносами строк — Vercel их сохранит правильно)
+   - `GOOGLE_PRIVATE_KEY` (вставляй как есть, с переносами строк)
    - `GOOGLE_CALENDAR_ID`
-5. Нажми **Deploy**. Через минуту сайт будет доступен по адресу вида `pure-beauty-booking.vercel.app`.
+6. Сделай любой пуш в `main` (или запусти workflow вручную: репозиторий → Actions → Deploy to Vercel → Run workflow) — GitHub Actions задеплоит сайт. Ссылка на сайт появится в выводе последнего шага (`vercel deploy`).
 
 ## Проверка
 
