@@ -25,7 +25,11 @@
     color: var(--accent-dark);
   }
   .hero .tagline { color: var(--muted); font-size: 0.85rem; margin: 0 0 16px; }
-  .hero .rating { font-size: 0.85rem; color: var(--accent-dark); font-weight: 600; }
+  .hero .rating { font-size: 0.85rem; color: var(--accent-dark); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .hero .stars { display: inline-flex; gap: 2px; }
+  .hero .stars svg { width: 15px; height: 15px; }
+  .hero .stars path { fill: var(--accent-dark); }
+  .hero .stars .star-empty { fill: var(--border); }
 
   .quick-actions {
     display: grid;
@@ -107,7 +111,20 @@
 <div class="hero">
   <h1>Pure Beauty</h1>
   <p class="tagline">Massage • Body Recovery • Therapy — Пловдив</p>
-  <p class="rating">★★★★☆ 4.7</p>
+  <p class="rating">
+    <span class="stars">
+      <svg viewBox="0 0 24 24"><path d="M12 2 L14.9 8.5 L22 9.3 L16.8 14.1 L18.2 21.2 L12 17.6 L5.8 21.2 L7.2 14.1 L2 9.3 L9.1 8.5 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2 L14.9 8.5 L22 9.3 L16.8 14.1 L18.2 21.2 L12 17.6 L5.8 21.2 L7.2 14.1 L2 9.3 L9.1 8.5 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2 L14.9 8.5 L22 9.3 L16.8 14.1 L18.2 21.2 L12 17.6 L5.8 21.2 L7.2 14.1 L2 9.3 L9.1 8.5 Z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2 L14.9 8.5 L22 9.3 L16.8 14.1 L18.2 21.2 L12 17.6 L5.8 21.2 L7.2 14.1 L2 9.3 L9.1 8.5 Z"/></svg>
+      <svg viewBox="0 0 24 24">
+        <defs><clipPath id="star-partial"><rect x="0" y="0" width="16.8" height="24"/></clipPath></defs>
+        <path d="M12 2 L14.9 8.5 L22 9.3 L16.8 14.1 L18.2 21.2 L12 17.6 L5.8 21.2 L7.2 14.1 L2 9.3 L9.1 8.5 Z" class="star-empty"/>
+        <path d="M12 2 L14.9 8.5 L22 9.3 L16.8 14.1 L18.2 21.2 L12 17.6 L5.8 21.2 L7.2 14.1 L2 9.3 L9.1 8.5 Z" clip-path="url(#star-partial)"/>
+      </svg>
+    </span>
+    4.7
+  </p>
 </div>
 
 <div class="quick-actions">
