@@ -1,48 +1,143 @@
-<!-- Pure Beauty booking site -->
 <!DOCTYPE html>
 <html lang="bg">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pure Beauty — Резервация</title>
+<title>Pure Beauty — Пловдив</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  .hero {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px 24px;
+    text-align: center;
+  }
+  .hero h1 { margin: 0 0 4px; font-size: 1.7rem; }
+  .hero .tagline { color: var(--muted); font-size: 0.85rem; margin: 0 0 16px; }
+  .hero .rating { font-size: 0.85rem; color: var(--accent-dark); font-weight: 600; }
+
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 16px 20px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .quick-actions a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.72rem;
+  }
+  .quick-actions .icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .home-section { max-width: 480px; margin: 0 auto; padding: 8px 20px 24px; }
+  .home-section h2 { font-size: 1rem; margin: 16px 0 12px; }
+
+  .cta-banner {
+    max-width: 480px;
+    margin: 8px auto 24px;
+    padding: 18px;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #fff;
+    text-align: center;
+  }
+  .cta-banner a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #fff;
+    color: var(--accent-dark);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .reviews { display: flex; flex-direction: column; gap: 10px; }
+  .review-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .review-card .stars { color: var(--accent-dark); font-size: 0.85rem; margin-bottom: 4px; }
+  .review-card p { margin: 0; font-size: 0.82rem; color: var(--muted); }
+  .review-card .placeholder-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.65rem;
+    color: var(--error);
+    opacity: 0.7;
+  }
+</style>
 </head>
-<body>
-  <main class="card">
-    <h1>Pure Beauty</h1>
-    <p class="subtitle">Massage • Body Recovery • Therapy</p>
+<body class="has-nav">
+<nav class="site-nav">
+  <a href="index.html" class="active">Начало</a>
+  <a href="procedures.html">Процедури</a>
+  <a href="flagship.html">Хидродинамика</a>
+  <a href="about.html">За мен</a>
+  <a href="booking.html" class="nav-cta">Резервация</a>
+</nav>
 
-    <form id="booking-form">
-      <label for="name">Име</label>
-      <input type="text" id="name" name="name" required autocomplete="name">
+<div class="hero">
+  <h1>Pure Beauty</h1>
+  <p class="tagline">Massage • Body Recovery • Therapy — Пловдив</p>
+  <p class="rating">★★★★★ 5.0</p>
+</div>
 
-      <label for="phone">Телефон</label>
-      <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+359...">
+<div class="quick-actions">
+  <a href="tel:+359000000000"><span class="icon">📞</span>Позвони</a>
+  <a href="https://wa.me/359000000000"><span class="icon">💬</span>WhatsApp</a>
+  <a href="https://instagram.com/body_therapy_aesthetics"><span class="icon">📷</span>Instagram</a>
+  <a href="https://maps.google.com/?q=ул.+Знаме+4,+Пловдив"><span class="icon">📍</span>Маршрут</a>
+</div>
 
-      <label for="service">Услуга</label>
-      <select id="service" name="service" required>
-        <option value="" disabled selected>Избери услуга</option>
-        <option value="therapeutic">Терапевтичен масаж (60 мин)</option>
-        <option value="myofascial">Миофасциален масаж (60 мин)</option>
-        <option value="relax">Възстановяващ/релакс масаж (60 мин)</option>
-        <option value="smartrf">Smart RF (45 мин)</option>
-        <option value="hivamat">HIVAMAT — дълбока осцилация (45 мин)</option>
-        <option value="consult">Консултация (20 мин)</option>
-      </select>
+<section class="home-section">
+  <h2>Процедури</h2>
+  <div class="procedure-grid">
+    <a href="procedure-therapeutic.html"><div class="thumb"></div><div class="info"><p class="name">Терапевтичен масаж</p><p class="duration">60 мин</p></div></a>
+    <a href="procedure-myofascial.html"><div class="thumb"></div><div class="info"><p class="name">Миофасциален масаж</p><p class="duration">60 мин</p></div></a>
+    <a href="procedure-relax.html"><div class="thumb"></div><div class="info"><p class="name">Възстановяващ масаж</p><p class="duration">60 мин</p></div></a>
+    <a href="procedure-smartrf.html"><div class="thumb"></div><div class="info"><p class="name">Smart RF</p><p class="duration">45 мин</p></div></a>
+    <a href="procedure-anticellulite.html"><div class="thumb"></div><div class="info"><p class="name">Антицелулит със Smart RF</p><p class="duration">45 мин</p></div></a>
+    <a href="procedure-hivamat.html"><div class="thumb"></div><div class="info"><p class="name">HIVAMAT</p><p class="duration">45 мин</p></div></a>
+  </div>
+</section>
 
-      <label for="date">Дата</label>
-      <input type="date" id="date" name="date" required>
+<div class="cta-banner">
+  <div>Готов да запазиш час?</div>
+  <a href="booking.html">Резервирай</a>
+</div>
 
-      <label for="time">Час</label>
-      <input type="time" id="time" name="time" required min="09:00" max="18:30" step="1800">
+<section class="home-section">
+  <h2>Отзиви</h2>
+  <div class="reviews">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Пример на отзив за усещането след сеанс — истински отзиви ще заменят това."</p>
+      <span class="placeholder-tag">заглушка, не реален отзив</span>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p>"Втори пример на отзив — за професионализма и атмосферата в студиото."</p>
+      <span class="placeholder-tag">заглушка, не реален отзив</span>
+    </div>
+  </div>
+</section>
 
-      <button type="submit" id="submit-btn">Резервирай</button>
-    </form>
-
-    <p id="status" role="status"></p>
-  </main>
-
-<script src="config.js"></script>
-<script src="script.js"></script>
 </body>
 </html>

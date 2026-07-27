@@ -116,3 +116,80 @@ button:disabled { opacity: 0.6; cursor: default; }
 
 #status.error { color: var(--error); }
 #status.success { color: var(--success); }
+
+/* --- Многостраничная навигация --- */
+
+.site-nav {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 10px 12px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.site-nav a {
+  flex: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+.site-nav a.active { color: var(--text); font-weight: 600; background: var(--bg); }
+.site-nav a.nav-cta { background: var(--accent); color: #fff; font-weight: 600; }
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  width: 100%;
+}
+.page h1 { font-size: 1.5rem; margin: 0 0 4px; }
+.page .lead { color: var(--muted); font-size: 0.9rem; margin: 0 0 24px; }
+.page article h2 { font-size: 1.1rem; margin: 28px 0 10px; }
+.page article h3 { font-size: 0.98rem; margin: 20px 0 8px; color: var(--accent-dark); }
+.page article p { line-height: 1.6; font-size: 0.92rem; color: var(--text); margin: 0 0 14px; }
+.page .sources { font-size: 0.75rem; color: var(--muted); margin-top: 24px; }
+.page .sources a { color: var(--muted); }
+.page .price-tag { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+.page .cta-inline {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.page .note { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 20px; }
+
+.procedure-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.procedure-grid a {
+  text-decoration: none;
+  color: inherit;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+}
+.procedure-grid .thumb {
+  height: 72px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--bg) 100%);
+  opacity: 0.5;
+}
+.procedure-grid .info { padding: 10px 12px; }
+.procedure-grid .name { font-size: 0.82rem; font-weight: 600; margin: 0 0 2px; }
+.procedure-grid .duration { font-size: 0.72rem; color: var(--muted); margin: 0; }
+
+body.has-nav { display: block; padding: 0; }

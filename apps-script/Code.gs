@@ -8,12 +8,13 @@ var WORK_START_HOUR = 9;
 var WORK_END_HOUR = 19;
 
 // Продължителност на услугите в минути — имената трябва да съвпадат
-// със стойността на value в <select> в public/index.html
+// със стойността на value в <select> в public/booking.html
 var SERVICES = {
   therapeutic: { label: 'Терапевтичен масаж', duration: 60 },
   myofascial: { label: 'Миофасциален масаж', duration: 60 },
   relax: { label: 'Възстановяващ/релакс масаж', duration: 60 },
   smartrf: { label: 'Smart RF', duration: 45 },
+  anticellulite: { label: 'Антицелулит със Smart RF', duration: 45 },
   hivamat: { label: 'HIVAMAT (дълбока осцилация)', duration: 45 },
   consult: { label: 'Консултация', duration: 20 },
 };
