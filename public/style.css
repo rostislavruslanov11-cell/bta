@@ -202,6 +202,41 @@ button:disabled { opacity: 0.6; cursor: default; }
 .page .cta-inline:active { transform: translateY(0) scale(0.97); }
 .page .note { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 20px; }
 
+.variant-cards { display: flex; flex-direction: column; gap: 10px; margin: 0 0 20px; }
+.variant-cards a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.9rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.variant-cards .zone { font-weight: 500; }
+.variant-cards .price { color: var(--muted); white-space: nowrap; }
+.variant-cards a.package { border-color: var(--accent); }
+.variant-cards a.package .zone,
+.variant-cards a.package .price { color: var(--accent-dark); font-weight: 600; }
+
+@media (hover: hover) {
+  .variant-cards a:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 12px 24px rgba(0, 0, 0, 0.16),
+      0 0 0 1.5px var(--accent),
+      0 0 18px rgba(var(--accent-rgb), 0.4);
+  }
+}
+.variant-cards a:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15), 0 0 0 1.5px var(--accent);
+}
+
 .procedure-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -8,14 +8,32 @@ var WORK_START_HOUR = 9;
 var WORK_END_HOUR = 19;
 
 // Продължителност на услугите в минути — имената трябва да съвпадат
-// със стойността на value в <select> в public/booking.html
+// със стойността на value в <select> в public/booking.html.
+// "Пакет 4+1" услугите блокират само един сеанс в календара (пакетът е
+// ценово/лоялностно споразумение, не по-дълга единична визита).
 var SERVICES = {
-  therapeutic: { label: 'Терапевтичен масаж', duration: 60 },
-  myofascial: { label: 'Миофасциален масаж', duration: 60 },
-  relax: { label: 'Възстановяващ/релакс масаж', duration: 60 },
-  smartrf: { label: 'Smart RF', duration: 45 },
-  anticellulite: { label: 'Антицелулит със Smart RF', duration: 45 },
-  hivamat: { label: 'HIVAMAT (дълбока осцилация)', duration: 45 },
+  avtorski_60: { label: 'Авторски масаж — цяло тяло, 60 мин', duration: 60 },
+  avtorski_90: { label: 'Авторски масаж — цяло тяло, 90 мин', duration: 90 },
+  avtorski_back: { label: 'Авторски масаж — гръб, 30 мин', duration: 30 },
+  avtorski_legs: { label: 'Авторски масаж — крака, 40 мин', duration: 40 },
+  avtorski_arms: { label: 'Авторски масаж — ръце, 30 мин', duration: 30 },
+  avtorski_neck: { label: 'Авторски масаж — шийно-яketна зона, 30 мин', duration: 30 },
+  avtorski_package: { label: 'Авторски масаж — пакет 4+1 (60 мин сеанс)', duration: 60 },
+
+  myo_60: { label: 'Миофасциален масаж — цяло тяло, 60 мин', duration: 60 },
+  myo_90: { label: 'Миофасциален масаж — цяло тяло, 90 мин', duration: 90 },
+  myo_back: { label: 'Миофасциален масаж — гръб, 30 мин', duration: 30 },
+  myo_legs: { label: 'Миофасциален масаж — крака, 40 мин', duration: 40 },
+  myo_arms: { label: 'Миофасциален масаж — ръце, 30 мин', duration: 30 },
+  myo_neck: { label: 'Миофасциален масаж — шийно-яketна зона, 30 мин', duration: 30 },
+  myo_package: { label: 'Миофасциален масаж — пакет 4+1 (60 мин сеанс)', duration: 60 },
+
+  vibration: { label: 'Дълбока вибрация (HIVAMAT), 15 мин', duration: 15 },
+  vibration_package: { label: 'Дълбока вибрация — пакет 4+1', duration: 15 },
+
+  smartrf: { label: 'Smart RF, 60 мин', duration: 60 },
+  smartrf_package: { label: 'Smart RF — пакет 4+1', duration: 60 },
+
   consult: { label: 'Консултация', duration: 20 },
 };
 

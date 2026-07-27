@@ -30,13 +30,35 @@
       <label for="service">Услуга</label>
       <select id="service" name="service" required>
         <option value="" disabled selected>Избери услуга</option>
-        <option value="therapeutic">Терапевтичен масаж (60 мин)</option>
-        <option value="myofascial">Миофасциален масаж (60 мин)</option>
-        <option value="relax">Възстановяващ/релакс масаж (60 мин)</option>
-        <option value="smartrf">Smart RF (45 мин)</option>
-        <option value="anticellulite">Антицелулит със Smart RF (45 мин)</option>
-        <option value="hivamat">HIVAMAT — дълбока осцилация (45 мин)</option>
-        <option value="consult">Консултация (20 мин)</option>
+        <optgroup label="Авторски масаж">
+          <option value="avtorski_60">Цяло тяло, 60 мин — 50€</option>
+          <option value="avtorski_90">Цяло тяло, 90 мин — 60€</option>
+          <option value="avtorski_back">Гръб, 30 мин — 25€</option>
+          <option value="avtorski_legs">Крака, 40 мин — 30€</option>
+          <option value="avtorski_arms">Ръце, 30 мин — 25€</option>
+          <option value="avtorski_neck">Шийно-яketна зона, 30 мин — 25€</option>
+          <option value="avtorski_package">Пакет 4+1 (60 мин сеанс)</option>
+        </optgroup>
+        <optgroup label="Миофасциален масаж">
+          <option value="myo_60">Цяло тяло, 60 мин — 50€</option>
+          <option value="myo_90">Цяло тяло, 90 мин — 60€</option>
+          <option value="myo_back">Гръб, 30 мин — 25€</option>
+          <option value="myo_legs">Крака, 40 мин — 30€</option>
+          <option value="myo_arms">Ръце, 30 мин — 25€</option>
+          <option value="myo_neck">Шийно-яketна зона, 30 мин — 25€</option>
+          <option value="myo_package">Пакет 4+1 (60 мин сеанс)</option>
+        </optgroup>
+        <optgroup label="Дълбока вибрация (HIVAMAT)">
+          <option value="vibration">Една програма, 15 мин — 15€</option>
+          <option value="vibration_package">Пакет 4+1</option>
+        </optgroup>
+        <optgroup label="Smart RF">
+          <option value="smartrf">Обща процедура, 60 мин — 60€</option>
+          <option value="smartrf_package">Пакет 4+1</option>
+        </optgroup>
+        <optgroup label="Друго">
+          <option value="consult">Консултация, 20 мин</option>
+        </optgroup>
       </select>
 
       <label for="date">Дата</label>

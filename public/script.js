@@ -5,6 +5,12 @@ const submitBtn = document.getElementById('submit-btn');
 // Не позволяваме резервация за минала дата
 document.getElementById('date').min = new Date().toISOString().slice(0, 10);
 
+// Предварителен избор на услуга през линк, напр. booking.html?service=avtorski_60
+const preselected = new URLSearchParams(window.location.search).get('service');
+if (preselected && form.service.querySelector(`option[value="${preselected}"]`)) {
+  form.service.value = preselected;
+}
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   statusEl.textContent = '';
