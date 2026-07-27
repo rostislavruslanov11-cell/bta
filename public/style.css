@@ -193,3 +193,21 @@ button:disabled { opacity: 0.6; cursor: default; }
 .procedure-grid .duration { font-size: 0.72rem; color: var(--muted); margin: 0; }
 
 body.has-nav { display: block; padding: 0; }
+
+/* Място за снимка — заглушка до качване на реални снимки */
+.photo-placeholder {
+  width: 100%;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--bg) 100%);
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 0.75rem;
+  text-align: center;
+  margin: 0 0 16px;
+}
+.photo-placeholder.banner { height: 160px; }
+.photo-placeholder.portrait { height: 220px; max-width: 220px; margin-left: auto; margin-right: auto; border-radius: 50%; }
+.photo-placeholder.square { height: 140px; }
