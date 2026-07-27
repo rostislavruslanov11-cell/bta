@@ -318,6 +318,7 @@ body.has-nav { display: block; padding: 0; }
   width: 220px;
   height: 220px;
   object-fit: cover;
+  object-position: 50% 25%;
   border-radius: 50%;
   margin: 0 auto 16px;
   border: 1px solid var(--border);
