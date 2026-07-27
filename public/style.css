@@ -4,6 +4,7 @@
   --text: #2b2622;
   --muted: #7a7168;
   --accent: #8a6d4f;
+  --accent-rgb: 138, 109, 79;
   --accent-dark: #6e5640;
   --border: #e4dcd1;
   --error: #b3413b;
@@ -17,6 +18,7 @@
     --text: #ece7e0;
     --muted: #a89f93;
     --accent: #c9a877;
+    --accent-rgb: 201, 168, 119;
     --accent-dark: #dab989;
     --border: #3a352f;
     --error: #e08079;
@@ -182,12 +184,28 @@ button:disabled { opacity: 0.6; cursor: default; }
   border-radius: 12px;
   overflow: hidden;
   display: block;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
-.procedure-grid a:hover,
-.procedure-grid a:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+
+/* Устройства с реален курсор — подем + меко сияние в акцентния цвят */
+@media (hover: hover) {
+  .procedure-grid a:hover,
+  .procedure-grid a:focus-visible {
+    transform: translateY(-5px);
+    box-shadow:
+      0 14px 28px rgba(0, 0, 0, 0.18),
+      0 0 0 1.5px var(--accent),
+      0 0 22px rgba(var(--accent-rgb), 0.45);
+  }
+}
+
+/* Тъч устройства без hover — лек отклик при натискане вместо hover ефекта */
+.procedure-grid a:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.15),
+    0 0 0 1.5px var(--accent);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 .procedure-grid .thumb {
   height: 72px;
