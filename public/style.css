@@ -103,10 +103,17 @@ button {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-button:hover { background: var(--accent-dark); }
+@media (hover: hover) {
+  button:not(:disabled):hover {
+    background: var(--accent-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18), 0 0 16px rgba(var(--accent-rgb), 0.4);
+  }
+}
+button:not(:disabled):active { transform: translateY(0) scale(0.97); }
 button:disabled { opacity: 0.6; cursor: default; }
 
 #status {
@@ -140,9 +147,24 @@ button:disabled { opacity: 0.6; cursor: default; }
   color: var(--muted);
   font-size: 0.82rem;
   white-space: nowrap;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 .site-nav a.active { color: var(--text); font-weight: 600; background: var(--bg); }
-.site-nav a.nav-cta { background: var(--accent); color: #fff; font-weight: 600; }
+.site-nav a.nav-cta {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+@media (hover: hover) {
+  .site-nav a:not(.nav-cta):not(.active):hover { background: var(--bg); color: var(--text); }
+  .site-nav a.nav-cta:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+  }
+}
+.site-nav a:active { transform: scale(0.94); }
 
 .page {
   max-width: 480px;
@@ -168,7 +190,16 @@ button:disabled { opacity: 0.6; cursor: default; }
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
+@media (hover: hover) {
+  .page .cta-inline:hover {
+    background: var(--accent-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18), 0 0 16px rgba(var(--accent-rgb), 0.4);
+  }
+}
+.page .cta-inline:active { transform: translateY(0) scale(0.97); }
 .page .note { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 20px; }
 
 .procedure-grid {
@@ -235,3 +266,23 @@ body.has-nav { display: block; padding: 0; }
 .photo-placeholder.banner { height: 160px; }
 .photo-placeholder.portrait { height: 220px; max-width: 220px; margin-left: auto; margin-right: auto; border-radius: 50%; }
 .photo-placeholder.square { height: 140px; }
+
+/* Анимации за бутоните на началната страница (cta-banner, quick-actions) */
+.cta-banner a { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+@media (hover: hover) {
+  .cta-banner a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+  }
+}
+.cta-banner a:active { transform: translateY(0) scale(0.97); }
+
+.quick-actions .icon { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+@media (hover: hover) {
+  .quick-actions a:hover .icon {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18), 0 0 16px rgba(var(--accent-rgb), 0.4);
+  }
+}
+.quick-actions a:active .icon { transform: translateY(0) scale(0.92); }
