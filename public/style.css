@@ -287,7 +287,10 @@ button:disabled { opacity: 0.6; cursor: default; }
   height: 72px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--bg) 100%);
   opacity: 0.5;
+  background-size: cover;
+  background-position: center;
 }
+.procedure-grid .thumb[style*="background-image"] { opacity: 1; }
 .procedure-grid .info { padding: 10px 12px; }
 .procedure-grid .name { font-size: 0.82rem; font-weight: 600; margin: 0 0 2px; }
 .procedure-grid .duration { font-size: 0.72rem; color: var(--muted); margin: 0; }
